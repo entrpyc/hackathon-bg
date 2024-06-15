@@ -6,6 +6,7 @@ from transformers import DistilBertTokenizer, DistilBertModel
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
+import joblib
 
 # Load and preprocess your dataset
 df = pd.read_csv('tire_life_dataset.csv')
@@ -18,11 +19,17 @@ y = df['tire_life'].values
 scaler = MinMaxScaler()
 y = scaler.fit_transform(y.reshape(-1, 1))
 
+# Save the scaler
+joblib.dump(scaler, 'scaler.joblib')
+
 # Split data into training and validation sets
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Tokenize input data
 tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
+
+# Save the tokenizer
+tokenizer.save_pretrained('tokenizer/')
 
 # Define a simple model for regression using DistilBERT
 class DistilBertForRegression(nn.Module):
@@ -96,22 +103,6 @@ for epoch in range(epochs):
         val_mse = mean_squared_error(y_val.cpu().numpy(), val_outputs.cpu().numpy())
         print(f'Epoch [{epoch+1}/{epochs}], Validation MSE: {val_mse:.4f}')
 
-# Example prediction
-def predict_single_example(example):
-    inputs = tokenizer.encode_plus(
-        f"{example[0]} {example[1]} {example[2]} {example[3]} {example[4]}",
-        add_special_tokens=True,
-        max_length=64,
-        padding='max_length',
-        return_attention_mask=True
-    )
-    input_ids = torch.tensor(inputs['input_ids']).unsqueeze(0)
-    attention_mask = torch.tensor(inputs['attention_mask']).unsqueeze(0)
-    model.eval()
-    with torch.no_grad():
-        output = model(input_ids, attention_mask=attention_mask).squeeze()  # Ensure output is 1D
-    return scaler.inverse_transform(output.cpu().numpy().reshape(-1, 1))[0][0]
-
-example_data = [28, 2, 70, 'Pirelly', 'Summer2']
-predicted_tire_life = predict_single_example(example_data)
-print(f'Predicted Tire Life: {predicted_tire_life}')
+# Save the model
+torch.save(model.state_dict(), 'distilbert_regression_model.pth')
+print("Model saved successfully!")
