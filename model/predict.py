@@ -1,8 +1,16 @@
 import sys
+import os
 import torch
 import torch.nn as nn
 from transformers import DistilBertTokenizer, DistilBertModel
 import joblib
+from pathlib import Path
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+tokenizer_path = file1_path = os.path.join(script_dir, 'tokenizer/')
+scaler_path = os.path.join(script_dir, 'scaler.joblib')
+model_path = os.path.join(script_dir, 'distilbert_regression_model.pth')
 
 # Define a simple model for regression using DistilBERT
 class DistilBertForRegression(nn.Module):
@@ -20,14 +28,14 @@ class DistilBertForRegression(nn.Module):
         return logits
 
 # Load the tokenizer
-tokenizer = DistilBertTokenizer.from_pretrained('tokenizer/')
+tokenizer = DistilBertTokenizer.from_pretrained(tokenizer_path)
 
 # Load the scaler
-scaler = joblib.load('scaler.joblib')
+scaler = joblib.load(scaler_path)
 
 # Load the model
 model = DistilBertForRegression()
-model.load_state_dict(torch.load('distilbert_regression_model.pth'))
+model.load_state_dict(torch.load(model_path))
 model.eval()
 
 def predict_single_example(example):

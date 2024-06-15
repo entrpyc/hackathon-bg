@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -8,8 +9,16 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 import joblib
 
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+dataset_path = os.path.join(script_dir, 'tire_life_dataset.csv')
+tokenizer_path = file1_path = os.path.join(script_dir, 'tokenizer/')
+scaler_path = os.path.join(script_dir, 'scaler.joblib')
+model_path = os.path.join(script_dir, 'distilbert_regression_model.pth')
+
 # Load and preprocess your dataset
-df = pd.read_csv('tire_life_dataset.csv')
+df = pd.read_csv(dataset_path)
 
 # Prepare data
 X = df[['temperature', 'rainfall', 'humidity', 'tire_make', 'tire_model']]
@@ -20,16 +29,16 @@ scaler = MinMaxScaler()
 y = scaler.fit_transform(y.reshape(-1, 1))
 
 # Save the scaler
-joblib.dump(scaler, 'scaler.joblib')
+joblib.dump(scaler, scaler_path)
 
 # Split data into training and validation sets
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Tokenize input data
-tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
+tokenizer = DistilBertTokenizer.from_pretrained(tokenizer_path)
 
 # Save the tokenizer
-tokenizer.save_pretrained('tokenizer/')
+tokenizer.save_pretrained(tokenizer_path)
 
 # Define a simple model for regression using DistilBERT
 class DistilBertForRegression(nn.Module):
@@ -104,5 +113,5 @@ for epoch in range(epochs):
         print(f'Epoch [{epoch+1}/{epochs}], Validation MSE: {val_mse:.4f}')
 
 # Save the model
-torch.save(model.state_dict(), 'distilbert_regression_model.pth')
+torch.save(model.state_dict(), model_path)
 print("Model saved successfully!")
