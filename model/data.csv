@@ -1,4 +1,4 @@
-tread_depth_mm,tire_type,tire_width_in,tire_diameter_in,tire_ratio_percent,car_weight_kg,pressure_checks_frequency,city_avg_speed_kph,outside_city_avg_speed_kph,driving_style_score,paved_road_score,offroad_score,paved_road_quality_score,offroad_quality_score,min_temperature_C,max_temperature_C,avg_temperature_C,driving_frequency_score,car_extra_load_weight_kg,tire_age_years,distance_driven_with_tires_km,tire_life_remaining_km
+thread_depth,tire_type,tire_width,tire_diameter,tire_ratio,car_weight,pressure_checks_frequency,city_avg_speed,outside_city_avg_speed,driving_style,paved_road,offroad,paved_road_quality,offroad_quality,min_temperature,max_temperature,avg_temperature,driving_frequency,car_extra_load_weight,tire_age,distance_driven_with_tires,tire_life_remaining
 9,all-season,22,15,43,1391,4,28,121,5,9,6,7,9,16,45,35,2,99,3,91849,96327
 1,winter,12,17,76,2806,9,30,121,7,2,1,1,4,-6,23,11,6,180,4,94213,91948
 5,all-season,20,20,53,2180,3,32,93,7,2,8,5,6,8,21,6,9,95,0,92880,99232

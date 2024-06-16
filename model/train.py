@@ -12,7 +12,7 @@ import joblib
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-dataset_path = os.path.join(script_dir, 'tire_life_dataset.csv')
+dataset_path = os.path.join(script_dir, 'data.csv')
 tokenizer_path = file1_path = os.path.join(script_dir, 'tokenizer/')
 scaler_path = os.path.join(script_dir, 'scaler.joblib')
 model_path = os.path.join(script_dir, 'distilbert_regression_model.pth')
