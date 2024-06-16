@@ -11,13 +11,6 @@ export default function Predict() {
   const [environmentAndUserInformation, setEnvironmentAndUserInformation] = useState<EnvironmentAndUserData>();
   const [selectedKeys, setSelectedKeys] = useState(new Set(["1"]));
 
-
-  // double check data types
-  // 3. fetch request to endpoint for durability approximation
-  // 4. display remaining time and total durability approximation
-  // update logo
-  // add onboarding
-
   const handleSubmit = () => {
     const formData = {
       ...tireInformation,
@@ -42,7 +35,7 @@ export default function Predict() {
       <Accordion selectionMode="single" variant="splitted" defaultExpandedKeys={["1"]} selectedKeys={selectedKeys} onSelectionChange={(v) => setSelectedKeys(v as SetStateAction<Set<string>>)}>
         <AccordionItem key="1" aria-label="Tire specifications" title="Tire specifications">
           <div className="flex flex-col justify-center gap-4">
-            <TireInformation setTireInformation={setTireInformation}  />
+            <TireInformation setTireInformation={setTireInformation} />
           </div>
         </AccordionItem>
         <AccordionItem key="2" aria-label="Environment and User behavior" title="Environment and User behavior">

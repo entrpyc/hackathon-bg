@@ -30,6 +30,14 @@ export default function TireInformation({ setTireInformation }: TireInformationP
     }));
   };
 
+  const handleSelectChange = (name: string, value: string) => {
+    setTireData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+
   const handleSave = () => {
     setTireInformation(tireData);
   };
@@ -57,7 +65,7 @@ export default function TireInformation({ setTireInformation }: TireInformationP
       />
       <Input type="number" label="Ratio (mm)" name="ratio" onChange={handleChange} />
       <Input type="number" label="Car weight (kg)" name="carWeight" onChange={handleChange} />
-      <RadioGroup label="Type" value={tireData.type} onChange={handleChange}>
+      <RadioGroup label="Type" value={tireData.type} onValueChange={(v) => handleSelectChange('type', v)} name="type">
         <Radio value="all-season">All season</Radio>
         <Radio value="summer">Summer</Radio>
         <Radio value="winter">Winter</Radio>
