@@ -5,6 +5,7 @@ import torch.nn as nn
 from transformers import DistilBertTokenizer, DistilBertModel
 import joblib
 from pathlib import Path
+from model import DistilBertForRegression
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -12,28 +13,10 @@ tokenizer_path = file1_path = os.path.join(script_dir, 'tokenizer/')
 scaler_path = os.path.join(script_dir, 'scaler.joblib')
 model_path = os.path.join(script_dir, 'distilbert_regression_model.pth')
 
-# Define a simple model for regression using DistilBERT
-class DistilBertForRegression(nn.Module):
-    def __init__(self):
-        super(DistilBertForRegression, self).__init__()
-        self.distilbert = DistilBertModel.from_pretrained('distilbert-base-uncased')
-        self.dropout = nn.Dropout(0.1)
-        self.linear = nn.Linear(768, 1)
-
-    def forward(self, input_ids, attention_mask):
-        outputs = self.distilbert(input_ids=input_ids, attention_mask=attention_mask)
-        pooled_output = outputs.last_hidden_state[:, 0, :]
-        pooled_output = self.dropout(pooled_output)
-        logits = self.linear(pooled_output)
-        return logits
-
-# Load the tokenizer
 tokenizer = DistilBertTokenizer.from_pretrained(tokenizer_path)
 
-# Load the scaler
 scaler = joblib.load(scaler_path)
 
-# Load the model
 model = DistilBertForRegression()
 model.load_state_dict(torch.load(model_path))
 model.eval()
@@ -53,7 +36,6 @@ def predict_single_example(example):
     return scaler.inverse_transform(output.cpu().numpy().reshape(-1, 1))[0][0]
 
 if __name__ == "__main__":
-    # Example data should be provided as command-line arguments
     if len(sys.argv) != 22:
         print("Usage: python predict.py <thread_depth> <tire_type> <tire_width> <tire_diameter> <tire_ratio> <car_weight> <pressure_checks_frequency> <city_avg_speed> <outside_city_avg_speed> <driving_style> <paved_road> <offroad> <paved_road_quality> <offroad_quality> <min_temperature> <max_temperature> <avg_temperature> <driving_frequency> <car_extra_load_weight> <tire_age> <distance_driven_with_tires>")
         sys.exit(1)
