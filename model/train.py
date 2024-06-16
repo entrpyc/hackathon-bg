@@ -21,8 +21,8 @@ model_path = os.path.join(script_dir, 'distilbert_regression_model.pth')
 df = pd.read_csv(dataset_path)
 
 # Prepare data
-X = df[['temperature', 'rainfall', 'humidity', 'tire_make', 'tire_model']]
-y = df['tire_life'].values
+X = df[['thread_depth', 'tire_type', 'tire_width', 'tire_diameter', 'tire_ratio', 'car_weight', 'pressure_checks_frequency', 'city_avg_speed', 'outside_city_avg_speed', 'driving_style', 'paved_road', 'offroad', 'paved_road_quality', 'offroad_quality', 'min_temperature', 'max_temperature', 'avg_temperature', 'driving_frequency', 'car_extra_load_weight', 'tire_age', 'distance_driven_with_tires']]
+y = df['tire_life_remaining'].values
 
 # Normalize the target values
 scaler = MinMaxScaler()
@@ -62,7 +62,7 @@ def convert_to_tensors(data):
 
     for index, row in data.iterrows():
         inputs = tokenizer.encode_plus(
-            f"{row['temperature']} {row['rainfall']} {row['humidity']} {row['tire_make']} {row['tire_model']}",
+            f"{row['thread_depth']} {row['tire_type']} {row['tire_width']} {row['tire_diameter']} {row['tire_ratio']} {row['car_weight']} {row['pressure_checks_frequency']} {row['city_avg_speed']} {row['outside_city_avg_speed']} {row['driving_style']} {row['paved_road']} {row['offroad']} {row['paved_road_quality']} {row['offroad_quality']} {row['min_temperature']} {row['max_temperature']} {row['avg_temperature']} {row['driving_frequency']} {row['car_extra_load_weight']} {row['tire_age']} {row['distance_driven_with_tires']}",
             add_special_tokens=True,
             max_length=64,
             padding='max_length',
@@ -88,7 +88,7 @@ scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2, gamma=0.1)
 
 # Training loop
 epochs = 10
-batch_size = 32
+batch_size = 50
 
 for epoch in range(epochs):
     model.train()
