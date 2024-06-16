@@ -17,7 +17,6 @@ const predict = async ({ temperature, rainfall, humidity, tire_make, tire_model 
   const scriptPath = path.join(__dirname, '../model/venv/bin/python');
   const filePath = path.join(__dirname, '../model/predict.py');
 
-  console.log(scriptPath, filePath, temperature, rainfall, humidity, tire_make, tire_model);
   try {
 
     return await invokeScript(scriptPath, [filePath, temperature, rainfall, humidity, tire_make, tire_model]);
