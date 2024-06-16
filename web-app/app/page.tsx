@@ -5,7 +5,7 @@ export default function Predict() {
     <section className="flex flex-col gap-44 py-8 md:py-10">
       <div className="flex flex-col gap-3 w-[500px] text-center mx-auto mb-9">
         <h1 className={title()}>Introducing the Tire Wear Prediction System:</h1>
-        <p className="w-[500px] mx-auto text-center">We developed a model to anticipate tire wear and ensure safety during extended journeys, even with the limitations of the Uniform Tire Quality Grading (UTQG) system.</p>
+        <p className="w-[500px] mx-auto text-center">A new way to anticipate tire wear and ensure safety during extended journeys, even with the limitations of the Uniform Tire Quality Grading (UTQG) system.</p>
       </div>
 
 
