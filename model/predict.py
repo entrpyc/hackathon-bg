@@ -60,4 +60,4 @@ if __name__ == "__main__":
     
     example_data = [sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5]]
     predicted_tire_life = predict_single_example(example_data)
-    print(f'Predicted Tire Life: {predicted_tire_life}')
+    print(predicted_tire_life)
