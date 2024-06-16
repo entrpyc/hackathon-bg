@@ -14,11 +14,11 @@ export default function Predict() {
         <div className="flex flex-col">
           <h2 className={semititle()}>The problem</h2>
 
-          <p className="mb-20">UTQG offers a standardized, yet approximate, estimate for tire durability. These general tests don't account for individual driving habits and environmental factors, which significantly impact tire wear.</p>
+          <p className="mb-20">UTQG offers a standardized, yet approximate, estimate for tire durability. These general tests don&apos;t account for individual driving habits and environmental factors, which significantly impact tire wear.</p>
 
           <h2 className={semititle()}>The solution</h2>
 
-          <p>Our system utilizes AI to adapt durability assessments to your specific driving habits and environment. We provide a simple and accessible application to easily check your tires' condition at any time.</p>
+          <p>Our system utilizes AI to adapt durability assessments to your specific driving habits and environment. We provide a simple and accessible application to easily check your tires&apos; condition at any time.</p>
         </div>
       </div>
 
