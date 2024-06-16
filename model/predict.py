@@ -22,7 +22,7 @@ class DistilBertForRegression(nn.Module):
 
     def forward(self, input_ids, attention_mask):
         outputs = self.distilbert(input_ids=input_ids, attention_mask=attention_mask)
-        pooled_output = outputs.last_hidden_state[:, 0, :]  # Take the [CLS] token's output
+        pooled_output = outputs.last_hidden_state[:, 0, :]
         pooled_output = self.dropout(pooled_output)
         logits = self.linear(pooled_output)
         return logits
