@@ -14,9 +14,7 @@ app.get('/predict', async (req, res) => {
 
   const result = await predict({ temperature, rainfall, humidity, tire_make, tire_model });
 
-  console.log(result);
-
-  res.send({ result });
+  res.send({ result: Number(result) });
 });
 
 const port = process.env.PORT || 3000;
