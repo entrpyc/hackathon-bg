@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 
 # Define possible tire makes and models
 tire_makes = ['Pirelli', 'Michelin', 'Goodyear']
@@ -27,5 +28,8 @@ df = generate_data(num_entries)
 # Display the first few rows of the dataset
 print(df.head())
 
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+dataset_path = file1_path = os.path.join(script_dir, 'tire_life_dataset.csv')
 # Save the dataset to a CSV file
-df.to_csv('tire_life_dataset.csv', index=False)
+df.to_csv(dataset_path, index=False)
