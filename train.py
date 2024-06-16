@@ -30,7 +30,7 @@ joblib.dump(scaler, scaler_path)
 
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
-tokenizer = DistilBertTokenizer.from_pretrained(tokenizer_path)
+tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
 
 tokenizer.save_pretrained(tokenizer_path)
 
