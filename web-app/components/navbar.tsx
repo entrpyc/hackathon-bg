@@ -27,7 +27,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full py-3" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <div className="w-36">
+            <div className="w-16">
               <img src="/logo.png" alt="" />
             </div>
           </NextLink>
