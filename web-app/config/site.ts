@@ -1,6 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
+  name: 'ClearRoute Bulgaria',
+  description: 'Predict durability with AI',
   navItems: [
     {
       label: "Tire durability",
